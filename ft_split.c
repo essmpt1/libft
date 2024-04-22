@@ -22,7 +22,7 @@ static size_t	ft_count(char const *s, char c)
 	while (s[i] != '\0')
 	{
 		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			count++; 
+			count++;
 		while (s[i] == c && s[i + 1] == c)
 			i++;
 		i++;
@@ -30,7 +30,20 @@ static size_t	ft_count(char const *s, char c)
 	return (count);
 }
 
-static void	ft_split_help(char **strs, char const *s, char c)
+static void	ft_split_free(char **strs, size_t len)
+{
+    size_t  i;
+
+    i = 0;
+    while (len > i)
+    {
+        free(strs[i]);
+        i++;
+    }
+    free(strs);
+}
+
+static char	**ft_split_help(char **strs, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
@@ -55,19 +68,7 @@ static void	ft_split_help(char **strs, char const *s, char c)
 		k++;
 	}
 	strs[k] = NULL;
-}
-
-static void	ft_split_free(char **strs, size_t len)
-{
-	size_t	i;
-
-	i = 0;
-	while (len > i)
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
+    return (strs);
 }
 
 char	**ft_split(char const *s, char c)
@@ -80,10 +81,12 @@ char	**ft_split(char const *s, char c)
 	len_s = ft_count(s, c);
 	strs = malloc(sizeof(char *) * (len_s + 1));
 	if (!strs)
-	{
-		ft_split_free(strs, len_s);
 		return (NULL);
-	}
 	ft_split_help(strs, s, c);
+    if (!strs)
+    {
+        ft_split_free(strs, len_s);
+        return (NULL);
+    }
 	return (strs);
 }
