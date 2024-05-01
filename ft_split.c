@@ -6,7 +6,7 @@
 /*   By: malourei <malourei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 19:25:47 by malourei          #+#    #+#             */
-/*   Updated: 2024/04/17 19:07:10 by malourei         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:26:42 by malourei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ static size_t	ft_count(char const *s, char c)
 
 static void	ft_split_free(char **strs, size_t len)
 {
-    size_t  i;
+	size_t	i;
 
-    i = 0;
-    while (len > i)
-    {
-        free(strs[i]);
-        i++;
-    }
-    free(strs);
+	i = 0;
+	while (len > i)
+	{
+		free(strs[i]);
+		i++;
+	}
+	free(strs);
 }
 
 static char	**ft_split_help(char **strs, char const *s, char c)
@@ -51,24 +51,25 @@ static char	**ft_split_help(char **strs, char const *s, char c)
 
 	i = 0;
 	k = 0;
-	j = 0;
 	while (k < ft_count(s, c)) 
 	{
 		while (s[i] == c && s[i] != '\0')
-		{
 			i++;
-			j = i;
-		}
+		j = i;
 		while (s[i] != c && s[i] != '\0')
 			i++;
 		strs[k] = ft_substr(s, j, (i - j));
+		if (!strs[k])
+		{
+			ft_split_free(strs, k);
+			return (NULL);
+		}
 		while (s[i] == c)
 			i++;
-		j = i;
 		k++;
 	}
 	strs[k] = NULL;
-    return (strs);
+	return (strs);
 }
 
 char	**ft_split(char const *s, char c)
@@ -83,10 +84,5 @@ char	**ft_split(char const *s, char c)
 	if (!strs)
 		return (NULL);
 	ft_split_help(strs, s, c);
-    if (!strs)
-    {
-        ft_split_free(strs, len_s);
-        return (NULL);
-    }
 	return (strs);
 }

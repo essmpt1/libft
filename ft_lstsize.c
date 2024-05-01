@@ -12,39 +12,39 @@
 
 #include "libft.h"
 
-int ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (lst != NULL)
-    {
-        i++;
-        lst = lst->next;
-    }
-    return (i);
+	i = 0;
+	while (lst != NULL)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
 }
 
 /*
 int main()
 {
-    t_list *root = NULL;
+	t_list *root = NULL;
 
-    t_list *no1 = ft_lstnew("Teste1");
-    t_list *no2 = ft_lstnew("Teste2");
-    t_list *no3 = ft_lstnew("Teste3");
+	t_list *no1 = ft_lstnew("Teste1");
+	t_list *no2 = ft_lstnew("Teste2");
+	t_list *no3 = ft_lstnew("Teste3");
 
-    ft_lstadd_front(&root, no1);
-    ft_lstadd_front(&root, no2);
-    ft_lstadd_front(&root, no3);
+	ft_lstadd_front(&root, no1);
+	ft_lstadd_front(&root, no2);
+	ft_lstadd_front(&root, no3);
 
-    t_list *curr = root;
-    printf("%d\n", ft_lstsize(curr));
-    while (curr != NULL)
-    {
-        printf("%s\n", (char *)curr->content);
-        curr = curr->next;
-    }
-    return 0;
+	t_list *curr = root;
+	printf("%d\n", ft_lstsize(curr));
+	while (curr != NULL)
+	{
+		printf("%s\n", (char *)curr->content);
+		curr = curr->next;
+	}
+	return 0;
 }
  */

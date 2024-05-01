@@ -19,10 +19,8 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
 
 # Source files for the bonus part
-BONUS_SRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c
-#
-#	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
-#	ft_lstiter.c ft_lstmap.c
+BONUS_SRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
+	ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 # Object files generated from source files
 OBJS = $(SRCS:%.c=$(SRC_DIR)/%.o)
@@ -36,12 +34,16 @@ INC_DIR = .
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rule to create the target library
-$(NAME): $(OBJS) $(BONUS_OBJS)
-	@ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
+$(NAME): $(OBJS)
+	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
 # Rule to build the library
 all: $(NAME)
+
+bonus: $(BONUS_OBJS)
+	@ar rc $(NAME) $(BONUS_OBJS)
+	@ranlib $(NAME)
 
 # Rule to remove object files
 clean:

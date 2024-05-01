@@ -6,7 +6,7 @@
 /*   By: malourei <malourei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 21:10:57 by malourei          #+#    #+#             */
-/*   Updated: 2024/04/17 00:01:09 by malourei         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:33:21 by malourei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,22 @@ char	*ft_strrchr(const char *s, int c)
 	size_t	tamanho;
 
 	tamanho = ft_strlen(s);
-	if (c == '\0')
-		return ((char *) &s[tamanho]);
-	while (tamanho > 0)
+	while (s[tamanho] != (char)c)
 	{
+		if (tamanho == 0)
+			return (NULL);
 		tamanho--;
-		if (s[tamanho] == (char)c)
-			return ((char *)&s[tamanho]);
 	}
-	return (NULL);
+	return ((char *)&s[tamanho]);
 }
+/*
+
+ int main()
+{
+	char *s = "Teste";
+	char a = 'e';
+	printf("FI: %s\n", strrchr(s, a));
+	printf("FT: %s\n", ft_strrchr(s, a));
+	return 0;
+}
+*/
